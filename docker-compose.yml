@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  auth:
+    image: auth-service
+    build: .
+    environment:
+      KEYSTROKE_DYNAMICS_MLAB_HOST: "mongo:27017"
+      KEYSTROKE_DYNAMICS_MLAB_USER: admin 
+      KEYSTROKE_DYNAMICS_MLAB_PASSWORD: adminadmin
+      KEYSTROKE_DYNAMICS_TOKEN_SECRET: 1234mistura
+    ports:
+      - 5000:5000
+      
+  mongo:
+    image: mongo:3.2.17
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminadmin
+    volumes:
+      - mongodb_data_container:/data/db
+volumes:
+  mongodb_data_container:
